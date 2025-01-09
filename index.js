@@ -19,13 +19,17 @@ db.on("error", () => {
 });
 
 // Allow CORS for all websites
+
 app.use(
   cors({
-    origin: "*", // Allows any origin
-    methods: ["GET", "POST", "PATCH", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    origin: "*", // Allow all origins
+    methods: ["GET", "POST", "PATCH", "DELETE"], // Allowed request methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
   })
 );
+
+app.use(express.json());
+app.options("*", cors()); // Handle preflight requests globally
 
 app.use(express.json());
 app.use("/Signup-Login", SL);
